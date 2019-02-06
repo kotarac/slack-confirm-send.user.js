@@ -8,10 +8,16 @@
 // ==/UserScript==
 
 const submit = TS.view.submit
+const clear = TS.view.clearMessageInput
 
 function patch () {
   TS.view.submit = function () {
-    confirm('confirm send') && submit()
+    const confirmed = confirm('confirm send')
+    if (confirmed) {
+      submit()
+    } else {
+      clear()
+    }
   }
 }
 
